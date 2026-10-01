@@ -1,0 +1,1 @@
+export default function V2Loading() { return <main className="loading-page" aria-label="Loading your library"><div className="loading-line" /><div className="loading-block" /><div className="loading-cards"><span /><span /><span /></div><span className="sr-only">Your Teens2Inspire library is loading.</span></main>; }

@@ -1,0 +1,2 @@
+import { CatalogBrowser } from "@/components/catalog-browser";
+export default async function V2PodcastsPage({ searchParams }: { searchParams: Promise<{ q?: string; category?: string; sort?: "newest" | "featured" }> }) { const { q, category, sort } = await searchParams; return <CatalogBrowser basePath="/v2" type="podcast" heading="Good company for the way." intro="Conversations, voices, and a little perspective for walks, rides, and whatever comes next." search={q} category={category} sort={sort === "featured" ? sort : "newest"} />; }
