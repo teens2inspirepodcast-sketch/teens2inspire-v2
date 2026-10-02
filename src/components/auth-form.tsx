@@ -34,11 +34,13 @@ export function AuthForm({ mode }: { mode: Mode }) {
       } else if (mode === "signup") {
         const firstName = String(form.get("first_name") ?? "").trim();
         const displayName = String(form.get("display_name") ?? "").trim();
+        const requestedNext = new URLSearchParams(window.location.search).get("next");
+        const next = requestedNext?.startsWith("/v2") || requestedNext === "/update-password" ? requestedNext : "/v2/dashboard";
         const { data, error: authError } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/callback?next=/v2/dashboard`,
+            emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
             data: {
               first_name: firstName,
               display_name: displayName,
@@ -50,7 +52,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
         });
         if (authError) throw authError;
         if (data.session) {
-          router.replace("/v2/dashboard");
+          router.replace(next);
           router.refresh();
         } else {
           setMessage("Check your inbox for a secure link to finish creating your account.");

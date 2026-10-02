@@ -1,6 +1,8 @@
 import "server-only";
 import Stripe from "stripe";
 
+export type MembershipPlan = "personal" | "family";
+
 let stripe: Stripe | undefined;
 
 export function getStripe() {
@@ -10,6 +12,20 @@ export function getStripe() {
   return stripe;
 }
 
+export function stripePriceIds() {
+  return {
+    personal: process.env.STRIPE_PRICE_ID_PERSONAL,
+    family: process.env.STRIPE_PRICE_ID_FAMILY,
+  };
+}
+
+export function getStripePriceId(plan: MembershipPlan) {
+  const priceId = stripePriceIds()[plan];
+  if (!priceId) throw new Error(`Stripe price is not configured for the ${plan} plan.`);
+  return priceId;
+}
+
 export function stripeReadyForBilling() {
-  return Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRICE_ID);
+  const prices = stripePriceIds();
+  return Boolean(process.env.STRIPE_SECRET_KEY && prices.personal && prices.family);
 }

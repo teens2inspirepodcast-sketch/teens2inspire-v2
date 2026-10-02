@@ -856,3 +856,51 @@ h1 em, h2 em { color: var(--rose); font-weight: 400; }
   .moderation-inbox { grid-column: auto; }
   .admin-header-actions { align-items: flex-start; }
 }
+
+
+.membership-plan-options {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.membership-plan-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line, rgba(255,255,255,.14));
+  border-radius: 14px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.membership-plan-option:hover:not(:disabled),
+.membership-plan-option.is-selected {
+  border-color: rgba(214, 173, 112, .7);
+  background: rgba(214, 173, 112, .07);
+}
+
+.membership-plan-option:disabled {
+  cursor: not-allowed;
+  opacity: .65;
+}
+
+.membership-plan-option > span:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.membership-plan-option strong {
+  font-size: .98rem;
+}
+
+.membership-plan-option small {
+  opacity: .68;
+  font-size: .8rem;
+}

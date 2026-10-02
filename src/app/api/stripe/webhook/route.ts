@@ -22,8 +22,9 @@ async function syncSubscription(admin: ReturnType<typeof createServiceSupabase>,
   // Stripe's current API exposes billing periods on subscription items.
   const currentStart = timestamp(item?.current_period_start);
   const currentEnd = timestamp(item?.current_period_end);
-  const priceId = item?.price.id || process.env.STRIPE_PRICE_ID;
+  const priceId = item?.price.id;
   if (!priceId) throw new Error("Subscription price was not present.");
+  const membershipTier = subscription.metadata.membership_plan === "family" ? "family" : "personal";
   const row = {
     user_id: resolvedOwnerId,
     stripe_customer_id: customerId,
@@ -45,7 +46,7 @@ async function syncSubscription(admin: ReturnType<typeof createServiceSupabase>,
     stripe_customer_id: customerId,
     stripe_subscription_id: subscription.id,
     membership_type: "standard",
-    membership_tier: "personal",
+    membership_tier: membershipTier,
     membership_status: profileStatus,
     membership_period_end: currentEnd,
     membership_expires_at: currentEnd,

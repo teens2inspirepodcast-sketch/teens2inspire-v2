@@ -43,10 +43,11 @@ export function secretEnvironment() {
     supabaseSecret: optionalSecret.parse(process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY),
     stripeSecret: optionalSecret.parse(process.env.STRIPE_SECRET_KEY),
     stripeWebhookSecret: optionalSecret.parse(process.env.STRIPE_WEBHOOK_SECRET),
-    stripePriceId: optionalSecret.parse(process.env.STRIPE_PRICE_ID),
+    stripePriceIdPersonal: optionalSecret.parse(process.env.STRIPE_PRICE_ID_PERSONAL),
+    stripePriceIdFamily: optionalSecret.parse(process.env.STRIPE_PRICE_ID_FAMILY),
   };
 }
 
 export function hasStripeCheckoutConfiguration() {
-  return Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRICE_ID);
+  return Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRICE_ID_PERSONAL && process.env.STRIPE_PRICE_ID_FAMILY);
 }

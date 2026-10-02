@@ -43,7 +43,7 @@ Configure the following server-only environment values in local development and 
 
 - `STRIPE_SECRET_KEY`
 - `STRIPE_WEBHOOK_SECRET`
-- `STRIPE_PRICE_ID` for the recurring membership Price
+- `STRIPE_PRICE_ID_PERSONAL` and `STRIPE_PRICE_ID_FAMILY` for the recurring membership Prices
 - `SUPABASE_SECRET_KEY` (or `SUPABASE_SERVICE_ROLE_KEY`) for trusted Stripe webhook synchronization
 - `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_PRIVATE_BUCKET_NAME`, and `R2_PUBLIC_BUCKET_NAME` for Cloudflare R2 access (server-only)
 - `R2_PUBLIC_BASE_URL` for the public artwork bucket's HTTPS custom domain
@@ -68,7 +68,7 @@ Playwright runs the public, authentication-gate, mobile viewport, and brand/no-e
 2. Vercel should detect Next.js automatically. Use `npm ci` for install, `npm run build` for build, and `npm run start` for local production-mode smoke checks. Runtime requirement is Node.js 22.12 or newer; deploy as a Next.js application (not a static export) so server components and API routes remain enabled.
 3. Configure these Vercel environment variables before the production build:
    - Public: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and `NEXT_PUBLIC_SITE_URL` (the actual HTTPS production origin).
-   - Server-only: `SUPABASE_SECRET_KEY` (or legacy `SUPABASE_SERVICE_ROLE_KEY`), `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_PRIVATE_BUCKET_NAME`, and `R2_PUBLIC_BUCKET_NAME`.
+   - Server-only: `SUPABASE_SECRET_KEY` (or legacy `SUPABASE_SERVICE_ROLE_KEY`), `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID_PERSONAL`, `STRIPE_PRICE_ID_FAMILY`, `STRIPE_WEBHOOK_SECRET`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_PRIVATE_BUCKET_NAME`, and `R2_PUBLIC_BUCKET_NAME`.
    - Public image delivery: `R2_PUBLIC_BASE_URL` set to the HTTPS custom domain attached to the public artwork bucket.
    - This app uses Stripe-hosted Checkout and Billing Portal sessions; it does not need a Stripe publishable key in the browser. Never put server-only values in `NEXT_PUBLIC_*` variables.
 4. Set the Supabase Auth Site URL to the production origin, add the production `/auth/callback` redirect URL, configure email confirmation/recovery delivery, enable leaked-password protection, and review existing school/family `SECURITY DEFINER` helpers. These are owner-level Supabase Auth/security settings; this workspace does not change them.
