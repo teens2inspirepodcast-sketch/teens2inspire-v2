@@ -1,2 +1,0 @@
-import { CatalogBrowser } from "@/components/catalog-browser";
-export default async function V2VideosPage({ searchParams }: { searchParams: Promise<{ q?: string; category?: string; sort?: "newest" | "featured" }> }) { const { q, category, sort } = await searchParams; return <CatalogBrowser basePath="/v2" type="video" heading="A different way to see it." intro="Personal stories, good questions, and voices worth sitting with." search={q} category={category} sort={sort === "featured" ? sort : "newest"} />; }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthForm } from "@/components/auth-form";
-export const metadata: Metadata = { title: "Create an account" };
-export default function SignupPage() { return <main className="auth-page"><div className="auth-photo-panel signup-photo"><span className="eyebrow eyebrow-gold">A fresh page</span><h2>More curious.<br />More <em>you.</em></h2><p>A place to follow a thought, hear a new voice, and save what speaks to you.</p><Link href="/about" className="text-link">What Teens2Inspire is about <span aria-hidden="true">→</span></Link></div><div className="auth-panel"><AuthForm mode="signup" /></div></main>; }
+export const metadata: Metadata = { title: "Join Teens2Inspire" };
+export default function SignupPage() { return <main className="auth-page"><div className="auth-photo-panel signup-photo"><span className="eyebrow eyebrow-gold">Join Teens2Inspire</span><h2>Make your account.<br />Then enter the <em>app.</em></h2><p>Choose school, personal, or family access. Your media experience lives at media.teens2inspire.org.</p><Link href="/school" className="text-link">Learn about school access <span aria-hidden="true">→</span></Link></div><div className="auth-panel"><AuthForm mode="signup" /></div></main>; }

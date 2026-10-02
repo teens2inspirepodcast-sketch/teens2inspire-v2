@@ -1,2 +1,0 @@
-import { CatalogBrowser } from "@/components/catalog-browser";
-export default async function V2DiscoverPage({ searchParams }: { searchParams: Promise<{ q?: string; category?: string; sort?: "newest" | "featured" }> }) { const { q, category, sort } = await searchParams; return <CatalogBrowser basePath="/v2" heading={q ? `A little about “${q}”` : "Find something that feels like yours."} intro="Good conversations, honest stories, new ideas, and thoughtful resources, all in one place." search={q} category={category} sort={sort === "featured" ? sort : "newest"} />; }

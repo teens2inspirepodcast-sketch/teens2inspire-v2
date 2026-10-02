@@ -69,8 +69,8 @@ export async function POST(request: Request) {
       customer: customerId,
       client_reference_id: user.id,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${origin}/v2/membership?checkout=complete&plan=${plan}`,
-      cancel_url: `${origin}/v2/membership?checkout=cancelled&plan=${plan}`,
+      success_url: `${origin}/download?checkout=complete&plan=${plan}`,
+      cancel_url: `${origin}/download?checkout=cancelled&plan=${plan}`,
       metadata: { supabase_user_id: user.id, membership_plan: plan },
       subscription_data: { metadata: { supabase_user_id: user.id, membership_plan: plan } },
     });

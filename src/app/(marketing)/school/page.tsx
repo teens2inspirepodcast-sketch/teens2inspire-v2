@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { SchoolApplicationForm } from "@/components/school-application-form";
+export const metadata: Metadata = { title: "School" };
+export default function SchoolPage() { return <main className="simple-page"><section className="school-hero"><span className="eyebrow eyebrow-gold">Teens2Inspire for schools</span><h1>Bring Teens2Inspire<br /><em>to your school.</em></h1><p>Participating schools can give their students free access to Teens2Inspire with a school code.</p></section><section className="school-content section-frame"><div><span className="eyebrow">How it works</span><h2>A simple school program.</h2><ol><li>Your school applies to participate.</li><li>Teens2Inspire reviews the application and sets up the school.</li><li>Your school receives a private school code.</li><li>Students create their own accounts and use the code for free access.</li></ol></div><SchoolApplicationForm /></section></main>; }
