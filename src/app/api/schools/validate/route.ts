@@ -13,7 +13,8 @@ export async function POST(request: Request) {
     const admin = createClient(url, supabaseSecret, { auth: { autoRefreshToken: false, persistSession: false } });
     const { data, error } = await admin.from("school_codes").select("school_name, active, max_uses, uses, expires_at").eq("code", code).maybeSingle();
     if (error) throw error;
-    const valid = Boolean(data?.active && (!data.expires_at || new Date(data.expires_at).getTime() > Date.now()) && (data.max_uses == null || data.uses < data.max_uses));
+    if (!data) return NextResponse.json({ valid: false, error: "That school code is not active. Check the code and try again." }, { status: 400 });
+    const valid = Boolean(data.active && (!data.expires_at || new Date(data.expires_at).getTime() > Date.now()) && (data.max_uses == null || data.uses < data.max_uses));
     if (!valid) return NextResponse.json({ valid: false, error: "That school code is not active. Check the code and try again." }, { status: 400 });
     return NextResponse.json({ valid: true, schoolName: data.school_name });
   } catch {
