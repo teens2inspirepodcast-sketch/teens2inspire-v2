@@ -1,49 +1,88 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, CalendarDays, School, Sparkles } from "lucide-react";
+import { ArrowRight, CalendarDays, School, Users } from "lucide-react";
 
 export default function HomePage() {
   return (
     <main>
-      <section className="site-hero">
-        <div className="site-hero-copy">
-          <span className="eyebrow eyebrow-gold"><span className="eyebrow-line" />Inspiring Jewish teen girls</span>
-          <h1>A place to <em>inspire</em> you, connect you, and help you grow.</h1>
-          <p>Teens2Inspire is a media and community platform made for Jewish teen girls — with conversations, stories, podcasts, videos, resources, events, and more.</p>
-          <div className="hero-actions"><Link href="/signup" className="button button-primary">Join Teens2Inspire <ArrowRight size={16} aria-hidden="true" /></Link><Link href="/about" className="text-link">Our story <span aria-hidden="true">→</span></Link></div>
-          <p className="hero-microcopy">Create your account here. Your media experience lives in the Teens2Inspire app.</p>
-        </div>
-        <div className="site-hero-brand-panel">
-          <Image src="/teens2inspire-logo.png" alt="Teens2Inspire — A media platform for Jewish teen girls" width={1086} height={362} priority className="site-logo-hero" />
-          <div className="hero-panel-rule" />
-          <p>One account. One place to start. A whole world of inspiration waiting for you.</p>
+      <section className="site-hero-simple">
+        <div className="site-hero-simple-inner">
+          <span className="eyebrow eyebrow-gold"><span className="eyebrow-line" />Teens2Inspire</span>
+          <h1>A space for<br /><em>Jewish teen girls.</em></h1>
+          <p>Inspiration, connection, and experiences created with Jewish teen girls in mind.</p>
+          <div className="hero-actions">
+            <Link href="/signup" className="button button-primary">Join Teens2Inspire <ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link href="/about" className="text-link">Our story <span aria-hidden="true">→</span></Link>
+          </div>
         </div>
       </section>
 
-      <section className="site-preview section-frame">
-        <div className="preview-copy"><span className="eyebrow">Your Teens2Inspire experience</span><h2>Designed for the app.<br /><em>Built around you.</em></h2><p>The public website is your account hub. After you join, you’ll use the Teens2Inspire media app for all of the content.</p><Link href="/download" className="text-link">Learn how to get the app <ArrowRight size={15} aria-hidden="true" /></Link></div>
-        <div className="preview-window" aria-label="Preview of the Teens2Inspire media app"><div className="preview-top"><span>Teens2Inspire</span><span className="preview-dot" /></div><div className="preview-hero"><span className="eyebrow eyebrow-gold">Made for your kind of curious</span><strong>Watch. Listen. Read.<br />Find something that speaks to you.</strong><span className="preview-button">Open the app</span></div><div className="preview-row"><span /><span /><span /></div><div className="preview-bottom"><span>Explore</span><span>Search</span><span>Library</span><span>Profile</span></div></div>
+      <section className="site-story section-frame">
+        <div>
+          <span className="eyebrow">Our story</span>
+          <h2>Created for girls who want a place that feels <em>theirs.</em></h2>
+        </div>
+        <div className="site-story-copy">
+          <p>Teens2Inspire is a platform created by Goldie Fishbaum for Jewish teen girls. It is a place to discover meaningful ideas, connect with inspiring people, and take part in experiences made for this stage of life.</p>
+          <Link href="/about" className="text-link">Learn more about Teens2Inspire <ArrowRight size={15} aria-hidden="true" /></Link>
+        </div>
       </section>
 
-      <section className="site-pillars section-frame">
-        <div className="section-heading section-heading-large"><div><span className="eyebrow">A platform with room for everything</span><h2>There is more than one way to be <em>inspired.</em></h2></div></div>
-        <div className="pillar-cards">
-          <article><span className="pillar-icon"><Sparkles size={19} aria-hidden="true" /></span><h3>Media made for you</h3><p>Podcasts, videos, stories, resources, and original Teens2Inspire content — all in one member experience.</p></article>
-          <article><span className="pillar-icon"><School size={19} aria-hidden="true" /></span><h3>School programs</h3><p>Schools can bring Teens2Inspire to their students with a school code and a dedicated free access program.</p></article>
-          <article><span className="pillar-icon"><CalendarDays size={19} aria-hidden="true" /></span><h3>Real-life connection</h3><p>Events, live experiences, Shabbatons, and opportunities to connect beyond a screen.</p></article>
+      <section className="site-app section-frame">
+        <div className="site-app-copy">
+          <span className="eyebrow eyebrow-gold">The Teens2Inspire app</span>
+          <h2>Your account starts here.<br /><em>The experience continues in the app.</em></h2>
+          <p>Teens2Inspire.org is your account hub. Once your account is ready, the separate Teens2Inspire media app is where the full content experience will live.</p>
+          <Link href="/download" className="button button-outline">Get the app <ArrowRight size={15} aria-hidden="true" /></Link>
+        </div>
+        <div className="site-app-placeholder" aria-hidden="true">
+          <div className="app-placeholder-top"><span>Teens2Inspire</span><span /></div>
+          <div className="app-placeholder-body"><span className="eyebrow eyebrow-gold">Coming to the app</span><strong>Made for Jewish teen girls.</strong><span className="placeholder-line" /><span className="placeholder-line short" /></div>
         </div>
       </section>
 
       <section className="site-membership section-frame">
-        <div><span className="eyebrow eyebrow-gold">Choose your way in</span><h2>Three ways to join.</h2><p>School access is free with a valid school code. Personal and Family memberships are paid subscriptions.</p></div>
+        <div>
+          <span className="eyebrow eyebrow-gold">Three ways to join</span>
+          <h2>Choose what works<br /><em>for you.</em></h2>
+          <p>School access is free with a valid school code. Personal and Family memberships are paid subscriptions.</p>
+        </div>
         <div className="plan-grid">
-          <article><span>School</span><strong>Free</strong><p>For girls whose school participates in Teens2Inspire.</p><Link href="/school" className="text-link">For schools <ArrowRight size={14} /></Link></article>
-          <article><span>Personal</span><strong>$7.99<span>/month</span></strong><p>One profile for one member.</p><Link href="/signup?plan=personal" className="text-link">Choose Personal <ArrowRight size={14} /></Link></article>
-          <article><span>Family</span><strong>$9.99<span>/month</span></strong><p>Up to three profiles under one membership.</p><Link href="/signup?plan=family" className="text-link">Choose Family <ArrowRight size={14} /></Link></article>
+          <article>
+            <span>School</span>
+            <strong>Free</strong>
+            <p>For girls whose school participates in Teens2Inspire.</p>
+            <Link href="/school" className="text-link">Learn about schools <ArrowRight size={14} aria-hidden="true" /></Link>
+          </article>
+          <article>
+            <span>Personal</span>
+            <strong>$7.99<span>/month</span></strong>
+            <p>One profile for one member.</p>
+            <Link href="/signup?plan=personal" className="text-link">Choose Personal <ArrowRight size={14} aria-hidden="true" /></Link>
+          </article>
+          <article>
+            <span>Family</span>
+            <strong>$9.99<span>/month</span></strong>
+            <p>Up to three profiles under one membership.</p>
+            <Link href="/signup?plan=family" className="text-link">Choose Family <ArrowRight size={14} aria-hidden="true" /></Link>
+          </article>
         </div>
       </section>
 
-      <section className="site-cta"><span className="eyebrow eyebrow-gold">Start here</span><h2>Join the Teens2Inspire<br /><em>community.</em></h2><p>Create your account on the website, then get the media app.</p><Link href="/signup" className="button button-primary">Create an account <ArrowRight size={16} /></Link></section>
+      <section className="site-pillars section-frame">
+        <div className="section-heading section-heading-large">
+          <div>
+            <span className="eyebrow">More to come</span>
+            <h2>A growing space for <em>Jewish teen girls.</em></h2>
+          </div>
+        </div>
+        <div className="pillar-cards">
+          <article><span className="pillar-icon"><Users size={19} aria-hidden="true" /></span><h3>Community</h3><p>Meaningful connection and a place to feel part of something.</p></article>
+          <article><span className="pillar-icon"><School size={19} aria-hidden="true" /></span><h3>Schools</h3><p>Programs that bring Teens2Inspire into participating schools.</p></article>
+          <article><span className="pillar-icon"><CalendarDays size={19} aria-hidden="true" /></span><h3>Events</h3><p>Live experiences, gatherings, Shabbatons, and more.</p></article>
+        </div>
+      </section>
+
+      <section className="site-cta"><span className="eyebrow eyebrow-gold">Start here</span><h2>Join the Teens2Inspire<br /><em>community.</em></h2><p>Create your account on the website, then get the app.</p><Link href="/signup" className="button button-primary">Create an account <ArrowRight size={16} aria-hidden="true" /></Link></section>
     </main>
   );
 }
