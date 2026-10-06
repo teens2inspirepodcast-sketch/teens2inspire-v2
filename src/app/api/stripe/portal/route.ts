@@ -11,7 +11,7 @@ export async function POST() {
   const { data: profile } = await supabase.from("profiles").select("stripe_customer_id").eq("id", user.id).maybeSingle();
   if (!profile?.stripe_customer_id) return NextResponse.json({ error: "There is no billing account to manage yet." }, { status: 409 });
   try {
-    const session = await getStripe().billingPortal.sessions.create({ customer: profile.stripe_customer_id, return_url: `${siteOrigin()}/v2/membership` });
+    const session = await getStripe().billingPortal.sessions.create({ customer: profile.stripe_customer_id, return_url: `${siteOrigin()}/download` });
     return NextResponse.json({ url: session.url });
   } catch {
     return NextResponse.json({ error: "Billing could not be opened. Please try again." }, { status: 502 });

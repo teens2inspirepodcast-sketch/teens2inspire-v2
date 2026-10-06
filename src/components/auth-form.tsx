@@ -23,6 +23,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
     setBusy(true);
     const form = new FormData(event.currentTarget);
     const supabase = createBrowserSupabase();
+    // Always send Auth emails back to the production website. Vercel Production should also set NEXT_PUBLIC_SITE_URL.
+    const siteOrigin = (process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://teens2inspire.org").replace(/\/$/, "");
     const email = String(form.get("email") ?? "").trim().toLowerCase();
     const password = String(form.get("password") ?? "");
     const selectedAccountType = String(form.get("account_type") ?? "personal") as "school" | "personal" | "family";
@@ -32,6 +34,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
         const validation = await fetch("/api/schools/validate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: schoolCode }) });
         const result = await validation.json();
         if (!validation.ok || !result.valid) throw new Error(result.error || "Invalid school code.");
+        form.set("school_code_hash", String(result.schoolCodeHash ?? ""));
       }
       if (mode === "login") {
         const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
@@ -48,13 +51,14 @@ export function AuthForm({ mode }: { mode: Mode }) {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
+            emailRedirectTo: `${siteOrigin}/auth/callback?next=${encodeURIComponent(next)}`,
             data: {
               first_name: firstName,
               display_name: displayName,
               age_group: "13plus",
               membership_tier: accountType,
               account_type: accountType,
+              school_code_hash: accountType === "school" ? String(form.get("school_code_hash") ?? "") : "",
               accepted_terms_at: new Date().toISOString(),
             },
           },
@@ -67,7 +71,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
           setMessage("Check your inbox for a secure link to finish creating your account.");
         }
       } else if (mode === "recovery") {
-        const { error: authError } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/auth/callback?next=/update-password` });
+        const { error: authError } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${siteOrigin}/auth/callback?next=/update-password` });
         if (authError) throw authError;
         setMessage("If an account matches that address, a password reset link is on its way.");
       } else {
